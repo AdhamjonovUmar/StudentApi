@@ -1,3 +1,6 @@
+using System;
+using System.Threading.Tasks;
+
 namespace Students.Services;
 
 public interface IEntityService<TEntity> where TEntity : class
