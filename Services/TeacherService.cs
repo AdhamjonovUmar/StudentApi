@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -17,14 +18,26 @@ public class TeacherService : IEntityService<Teacher>
         _logger =logger;
         _context = context;
     }
-    public Task<(bool IsSucces, Exception e)> DeleteAsync(Guid id)
+    public async Task<(bool IsSucces, Exception e)> DeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var teacher = await GetByIdAsync(id);
+            _context.Teachers.Remove(teacher);
+            await _context.SaveChangesAsync();
+            _logger.LogInformation($"Teacher was deleted with {id} id");
+            return(true, null);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError($"Student was not deleted.\nException: {e.Message}");
+            return(false, e);
+        }
     }
 
-    public Task<Teacher> GetAllAsync()
+    public async Task<List<Teacher>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return _context.Teachers.ToList();
     }
 
     public async Task<Teacher> GetByIdAsync(Guid id)
@@ -57,8 +70,18 @@ public class TeacherService : IEntityService<Teacher>
         }
     }
 
-    public Task<(bool IsSucces, Exception e)> UpdateAsync(Teacher entity)
+    public async Task<(bool IsSucces, Exception e)> UpdateAsync(Teacher entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _context.Teachers.Update(entity);
+            await _context.SaveChangesAsync();
+            return(true, null);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError($"Teacher was not updated.\nError: {e.Message}");
+            return(false, e);
+        }
     }
 }
