@@ -13,7 +13,7 @@ public class TeacherService : IEntityService<Teacher>
         _logger =logger;
         _context = context;
     }
-    public Task<(bool IsSucces, Exception e)> DeleteAsync(Teacher entity)
+    public Task<(bool IsSucces, Exception e)> DeleteAsync(Guid id)
     {
         throw new NotImplementedException();
     }

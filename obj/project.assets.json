@@ -1331,11 +1331,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/dell/backend/Students/Students.csproj",
+      "projectUniqueName": "/home/dell/backend/StudentApi/Students.csproj",
       "projectName": "Students",
-      "projectPath": "/home/dell/backend/Students/Students.csproj",
+      "projectPath": "/home/dell/backend/StudentApi/Students.csproj",
       "packagesPath": "/home/dell/.nuget/packages/",
-      "outputPath": "/home/dell/backend/Students/obj/",
+      "outputPath": "/home/dell/backend/StudentApi/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/dell/.nuget/NuGet/NuGet.Config"

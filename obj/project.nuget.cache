@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "92Obs4RpWsznfnYIVh6EOZiU6ZjO9YXFI43UPOqvKyomsyC4VowW2gj0RF2/Pb4l518lf8ggtrgdy0Dl+fyWAw==",
+  "dgSpecHash": "y3+YwsWwY8L1HanMQAeVru6lABKDyTFU/xGWOdulPMU6dccd5HVgBw5+/IFkaC6ac1oFj16thuhxQ6teokwUng==",
   "success": true,
-  "projectFilePath": "/home/dell/backend/Students/Students.csproj",
+  "projectFilePath": "/home/dell/backend/StudentApi/Students.csproj",
   "expectedPackageFiles": [
     "/home/dell/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/home/dell/.nuget/packages/microsoft.data.sqlite.core/6.0.5/microsoft.data.sqlite.core.6.0.5.nupkg.sha512",

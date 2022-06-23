@@ -14,7 +14,7 @@ public class StudentService : IEntityService<Student>
         _logger = logger;
         _context = context;   
     }
-    public Task<(bool IsSucces, Exception e)> DeleteAsync(Student entity)
+    public Task<(bool IsSucces, Exception e)> DeleteAsync(Guid id)
     {
         throw new NotImplementedException();
     }
