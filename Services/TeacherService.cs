@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Students.Data;
 using Students.Entities;
@@ -37,14 +38,14 @@ public class TeacherService : IEntityService<Teacher>
 
     public async Task<List<Teacher>> GetAllAsync()
     {
-        return _context.Teachers.ToList();
+        return _context.Teachers.Include(p => p.Students).ToList();
     }
 
     public async Task<Teacher> GetByIdAsync(Guid id)
     {
         try
         {
-            var teacher = _context.Teachers.FirstOrDefault(d => d.Id == id);
+            var teacher = _context.Teachers.Include(p => p.Students).FirstOrDefault(d => d.Id == id);
             return teacher;
         }
         catch(Exception e)

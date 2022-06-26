@@ -38,10 +38,10 @@ public class TeacherController : ControllerBase
         return Ok(new { error, message, teacher });
     }
 
-    [HttpGet("/getteacher")]
-    public async Task<IActionResult> GetTeacher([FromQuery]Guid id)
+    [HttpGet("/getteacher/{id}")]
+    public async Task<IActionResult> GetTeacher(Guid id)
     {
         var teacher = await _service.GetByIdAsync(id);
-        return Ok(teacher);
+        return Ok(new GetTeacherModel(teacher));
     }
 }

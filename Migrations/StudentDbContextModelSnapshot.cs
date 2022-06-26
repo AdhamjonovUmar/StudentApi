@@ -71,6 +71,36 @@ namespace Students.Migrations
 
                     b.ToTable("Teachers");
                 });
+
+            modelBuilder.Entity("StudentTeacher", b =>
+                {
+                    b.Property<Guid>("StudentsId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("TeachersId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("StudentsId", "TeachersId");
+
+                    b.HasIndex("TeachersId");
+
+                    b.ToTable("StudentTeacher");
+                });
+
+            modelBuilder.Entity("StudentTeacher", b =>
+                {
+                    b.HasOne("Students.Entities.Student", null)
+                        .WithMany()
+                        .HasForeignKey("StudentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Students.Entities.Teacher", null)
+                        .WithMany()
+                        .HasForeignKey("TeachersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 #pragma warning restore 612, 618
         }
     }

@@ -38,14 +38,14 @@ public class StudentService : IEntityService<Student>
 
     public async Task<List<Student>> GetAllAsync()
     {
-        return _context.Students.ToList();
+        return _context.Students.Include(p => p.Teachers).ToList();
     }
 
     public async Task<Student> GetByIdAsync(Guid id)
     {
         try
         {
-            var student = _context.Students.FirstOrDefault(d => d.Id == id);
+            var student = _context.Students.Include(p => p.Teachers).FirstOrDefault(d => d.Id == id);
             return student;
         }
         catch(Exception e)

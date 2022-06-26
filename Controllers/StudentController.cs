@@ -39,10 +39,10 @@ public class StudentController : ControllerBase
         return Ok(new {error, message, student});
     }
 
-    [HttpGet("/getstudent")]
-    public async Task<IActionResult> GetStudent([FromQuery]Guid id)
+    [HttpGet("/getstudent/{id}")]
+    public async Task<IActionResult> GetStudent(Guid id)
     {
         var student = await _service.GetByIdAsync(id);
-        return Ok(student);
+        return Ok(new GetStudentModel(student));
     }
 }

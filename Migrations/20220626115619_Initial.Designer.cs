@@ -11,8 +11,8 @@ using Students.Data;
 namespace Students.Migrations
 {
     [DbContext(typeof(StudentDbContext))]
-    [Migration("20220613183300_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220626115619_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -72,6 +72,36 @@ namespace Students.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Teachers");
+                });
+
+            modelBuilder.Entity("StudentTeacher", b =>
+                {
+                    b.Property<Guid>("StudentsId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("TeachersId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("StudentsId", "TeachersId");
+
+                    b.HasIndex("TeachersId");
+
+                    b.ToTable("StudentTeacher");
+                });
+
+            modelBuilder.Entity("StudentTeacher", b =>
+                {
+                    b.HasOne("Students.Entities.Student", null)
+                        .WithMany()
+                        .HasForeignKey("StudentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Students.Entities.Teacher", null)
+                        .WithMany()
+                        .HasForeignKey("TeachersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
