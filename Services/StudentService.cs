@@ -86,11 +86,11 @@ public class StudentService : IEntityService<Student>
         }
     }
 
-    public async Task<(bool IsSuccess, Exception e)> AddTeacherAsync(Guid id, Guid teaherId)
+    public async Task<(bool IsSuccess, Exception e)> AddTeacherAsync(Guid id, Guid teacherId)
     {
         try
         {
-            var teacher = await _context.Teachers.FirstOrDefaultAsync(d => d.Id == teaherId);
+            var teacher = await _context.Teachers.FirstOrDefaultAsync(d => d.Id == teacherId);
             if(teacher == default) throw new Exception("Teacher doesn't exist");
             var student = await GetByIdAsync(id);
             student.Teachers.Add(teacher);
