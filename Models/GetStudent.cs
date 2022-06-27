@@ -2,9 +2,9 @@ using Students.Entities;
 
 namespace Students.Models;
 
-public class GetStudentModel
+public class GetStudent
 {
-    public GetStudentModel(Student student)
+    public GetStudent(Student student)
     {
         Id = student.Id;
         FirstName = student.FirstName;

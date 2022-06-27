@@ -43,6 +43,26 @@ public class StudentController : ControllerBase
     public async Task<IActionResult> GetStudent(Guid id)
     {
         var student = await _service.GetByIdAsync(id);
-        return Ok(new GetStudentModel(student));
+        return Ok(new GetStudent(student));
+    }
+
+    [HttpGet("/getallstudents")]
+    public async Task<IActionResult> GetAllStudent()
+    {
+        var students = await _service.GetAllAsync();
+        var studentsmodel = students.Select(c => new GetStudent(c)).ToList();
+        return Ok(students);
+    }
+
+    [HttpPut("updatestudent/{teacherId}")]
+    public async Task<IActionResult> UpdateStudent([FromQuery]UpdateStudent updateStudent, Guid teacherId)
+    {
+        var student = await _service.GetByIdAsync(teacherId);
+        student.PhoneNumber = updateStudent.PhoneNumber ?? student.PhoneNumber;
+        student.Email = updateStudent.Email ?? student.Email;
+        var result = await _service.UpdateAsync(student);
+        var error = !result.IsSucces;
+        var message = result.e is null ? "Success" : result.e.Message;
+        return Ok(new {error, message});
     }
 }

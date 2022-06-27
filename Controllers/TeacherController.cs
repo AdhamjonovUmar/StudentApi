@@ -42,6 +42,6 @@ public class TeacherController : ControllerBase
     public async Task<IActionResult> GetTeacher(Guid id)
     {
         var teacher = await _service.GetByIdAsync(id);
-        return Ok(new GetTeacherModel(teacher));
+        return Ok(new GetTeacher(teacher));
     }
 }

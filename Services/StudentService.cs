@@ -85,4 +85,24 @@ public class StudentService : IEntityService<Student>
             return(false, e);
         }
     }
+
+    public async Task<(bool IsSuccess, Exception e)> AddTeacherAsync(Guid id, Guid teaherId)
+    {
+        try
+        {
+            var teacher = await _context.Teachers.FirstOrDefaultAsync(d => d.Id == teaherId);
+            if(teacher == default) throw new Exception("Teacher doesn't exist");
+            var student = await GetByIdAsync(id);
+            student.Teachers.Add(teacher);
+            _context.Students.Update(student);
+            await _context.SaveChangesAsync();
+            _logger.LogInformation("Ok");
+            return (true, null);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError($"Something went wrong:\n{e.Message}");
+            return (false, e);
+        }
+    }
 }
