@@ -51,7 +51,7 @@ public class StudentController : ControllerBase
     {
         var students = await _service.GetAllAsync();
         var studentsmodel = students.Select(c => new GetStudent(c)).ToList();
-        return Ok(students);
+        return Ok(studentsmodel);
     }
 
     [HttpPut("updatestudent/{teacherId}")]

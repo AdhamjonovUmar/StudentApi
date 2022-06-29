@@ -45,6 +45,14 @@ public class TeacherController : ControllerBase
         return Ok(new GetTeacher(teacher));
     }
 
+    [HttpGet("/getallteachers")]
+    public async Task<IActionResult> GetAllTeacher()
+    {
+        var teachers = await _service.GetAllAsync();
+        var teachersmodel = teachers.Select(c => new GetTeacher(c)).ToList();
+        return Ok(teachersmodel);
+    }
+
     [HttpPut("updateteacher/{studentId}")]
     public async Task<IActionResult> UpdateTeacher([FromQuery]UpdateTeacher updateTeacher, Guid studentId)
     {
