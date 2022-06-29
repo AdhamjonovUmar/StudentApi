@@ -44,4 +44,16 @@ public class TeacherController : ControllerBase
         var teacher = await _service.GetByIdAsync(id);
         return Ok(new GetTeacher(teacher));
     }
+
+    [HttpPut("updateteacher/{studentId}")]
+    public async Task<IActionResult> UpdateTeacher([FromQuery]UpdateTeacher updateTeacher, Guid studentId)
+    {
+        var student = await _service.GetByIdAsync(studentId);
+        student.PhoneNumber = updateTeacher.PhoneNumber ?? student.PhoneNumber;
+        student.Email = updateTeacher.Email ?? student.Email;
+        var result = await _service.UpdateAsync(student);
+        var error = !result.IsSucces;
+        var message = result.e is null ? "Success" : result.e.Message;
+        return Ok(new {error, message});
+    }
 }
