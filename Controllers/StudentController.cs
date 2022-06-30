@@ -65,4 +65,12 @@ public class StudentController : ControllerBase
         var message = result.e is null ? "Success" : result.e.Message;
         return Ok(new {error, message});
     }
+
+    [HttpGet("/getbyteacherid")]
+    public async Task<IActionResult> GetByTeacherId([FromQuery]Guid TeacherId)
+    {
+        var cars = await _service.GetByTeacherIdAsync(TeacherId);
+        var carsmodel = cars.Select(c => new GetStudent(c)).ToList();
+        return Ok(carsmodel);
+    }
 }

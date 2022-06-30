@@ -105,4 +105,10 @@ public class StudentService : IEntityService<Student>
             return (false, e);
         }
     }
+
+    public async Task<List<Student>> GetByTeacherIdAsync(Guid id)
+    {
+        var driver = await _context.Teachers.Include(d => d.Students).FirstOrDefaultAsync(d => d.Id == id);
+        return driver.Students.ToList();
+    }
 }
